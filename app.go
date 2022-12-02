@@ -154,7 +154,6 @@ func generateFunction(this js.Value, args []js.Value) interface{} {
 
 func main() {
 	println("app loaded")
-	defer println("app unloaded")
 	rand.Seed(time.Now().Unix())
 	c := make(chan struct{}, 0)
 	js.Global().Set("generate", js.FuncOf(generateFunction))
