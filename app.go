@@ -5,7 +5,9 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"strings"
 	"syscall/js"
+	"time"
 )
 
 var (
@@ -135,17 +137,21 @@ var (
 
 // GenerateProjectName generates a random project name.
 func GenerateProjectName() string {
-	return fmt.Sprintf("%s %s", adjectives[rand.Intn(len(adjectives))], nouns[rand.Intn(len(nouns))])
+	rand.Seed(time.Now().Unix())
+	return strings.ToLower(fmt.Sprintf("%s_%s", adjectives[rand.Intn(len(adjectives))], nouns[rand.Intn(len(nouns))]))
 }
 
 func gernerateFunction(this js.Value, p []js.Value) interface{} {
+	GenerateProjectName()
 	return js.ValueOf(GenerateProjectName())
 }
 
 func main() {
-	c := make(chan struct{}, 0)
-	//fmt.Println(GenerateProjectName())
 	println("Hello, WebAssembly!")
+	c := make(chan struct{}, 0)
+	for i := 0; i < 10; i++ {
+		fmt.Println(GenerateProjectName())
+	}
 	js.Global().Set("generate", js.FuncOf(gernerateFunction))
 	<-c
 }
