@@ -4,20 +4,19 @@
   <script src="wasm_exec.js"></script>
   <script>
     const go = new Go();
-    let mod, inst;
+    let inst;
 
     WebAssembly.instantiateStreaming(fetch("app.wasm"), go.importObject).then(
       (result) => {
         go.run(result.instance);
-        generate();
+        document.getElementById("content").innerHTML += "<pre><code>" + JSON.stringify(generate(21  ), null, " ") + "</code></pre>";
       }
     );
   </script>
 </head>
 
-<body>
-  <h1>Project Name Generator</h1>
-  <button onclick="alert(generate())">Generate project name</button>
+<body style="color:rgb(124, 255, 124);background-color:black;">
+  <div id="content"></div>
 </body>
 
 </html>

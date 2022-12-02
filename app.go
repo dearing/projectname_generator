@@ -135,23 +135,28 @@ var (
 	}
 )
 
-// GenerateProjectName generates a random project name.
 func GenerateProjectName() string {
-	rand.Seed(time.Now().Unix())
 	return strings.ToLower(fmt.Sprintf("%s_%s", adjectives[rand.Intn(len(adjectives))], nouns[rand.Intn(len(nouns))]))
 }
 
-func gernerateFunction(this js.Value, p []js.Value) interface{} {
-	GenerateProjectName()
-	return js.ValueOf(GenerateProjectName())
+func generateFunction(this js.Value, args []js.Value) interface{} {
+	count := 1
+	if len(args) != 0 {
+		count = args[0].Int()
+	}
+	var names []interface{}
+	for i := 0; i < count; i++ {
+		names = append(names, GenerateProjectName())
+	}
+
+	return js.ValueOf(names[:])
 }
 
 func main() {
-	println("Hello, WebAssembly!")
+	println("app loaded")
+	defer println("app unloaded")
+	rand.Seed(time.Now().Unix())
 	c := make(chan struct{}, 0)
-	for i := 0; i < 10; i++ {
-		fmt.Println(GenerateProjectName())
-	}
-	js.Global().Set("generate", js.FuncOf(gernerateFunction))
+	js.Global().Set("generate", js.FuncOf(generateFunction))
 	<-c
 }
