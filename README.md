@@ -54,3 +54,10 @@ Over in the frontend world we have an html document with some supporting javascr
     );
   </script>
 ```
+
+## Chrome Dev Tools
+
+```
+console.time('generate');generate(1000000);console.timeEnd('generate')
+generate: 9836.356201171875 ms
+```
