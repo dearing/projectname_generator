@@ -1,5 +1,9 @@
 # projectname_generator
-project names are hard yo (demo of wasm and go)
+because project names are hard yo
+
+hosted live: https://dearing.github.io/projectname_generator/
+
+_This project is silly in reality but it's a demo of how to use wasm with go._
 
 ## Usage
 
@@ -33,7 +37,7 @@ func main() {
 }
 ```
 
-Over in the frontend world we have an html document with some supporting javascript to interact with the wasm binary.  The wasm binary is loaded along with a javascript package to work with it provided by the go team.  With this, the generate function is availiable to javascript to call with cleaned up results that we simply print out to the a div with some styling.
+Over in the frontend world we have an html document with some supporting javascript to interact with the wasm binary.  The wasm binary is loaded along with a javascript package provided by the go team.  With this, the generate function is availiable to javascript to call with cleaned up results that we simply print out to the a div with some styling.
 
 ```html
   <script src="wasm_exec.js"></script>
