@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <script>
+      var go = new Go();
+
+      WebAssembly.instantiateStreaming(fetch("project_name_generator.wasm"), go.importObject).then(function (result) {
+        go.run(result.instance);
+      });
+
+      function generateProjectName() {
+        return go.exports.generateProjectName();
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Project Name Generator</h1>
+    <button onclick="document.getElementById('projectName').innerHTML = generateProjectName();">Generate Project Name</button>
+    <p id="projectName"></p>
+  </body>
+</html>
+``
