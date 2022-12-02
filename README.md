@@ -44,7 +44,8 @@ Over in the frontend world we have an html document with some supporting javascr
     WebAssembly.instantiateStreaming(fetch("app.wasm"), go.importObject).then(
       (result) => {
         go.run(result.instance);
-        document.getElementById("content").innerHTML += "<pre><code>" + JSON.stringify(generate(21  ), null, " ") + "</code></pre>";
+        document.getElementById("content").innerHTML +=
+          "<pre><code>" + JSON.stringify(generate(21), null, " ") + "</code></pre>";
       }
     );
   </script>
