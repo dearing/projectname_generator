@@ -1,12 +1,11 @@
 # projectname_generator
-_because project names are hard yo!_
+_This project is silly in reality but it's a demo of how to use wasm with go._
 
 The live website this repos shows, is a static site, hosted for free at github, that loads a binary compiled via this source, to do live work on the browser.  There is no server doing the work and returning results.  It's all live executed within your visit.
 
-hosted live: https://dearing.github.io/projectname_generator/
+visit: https://dearing.github.io/projectname_generator/
 
-_This project is silly in reality but it's a demo of how to use wasm with go._
-
+This could be done in javascript alone, yes but that isn't fun.
 
 ## Usage
 
