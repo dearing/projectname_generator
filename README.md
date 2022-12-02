@@ -57,7 +57,10 @@ Over in the frontend world we have an html document with some supporting javascr
 
 ## Chrome Dev Tools
 
-```
-console.time('generate');generate(1000000);console.timeEnd('generate')
-generate: 9836.356201171875 ms
-```
+`console.time('generate');generate(n);console.timeEnd('generate')`
+|n|time|
+|---|----|
+|10000| 109.079833984375 ms|
+|100000|  1508.261962890625 ms|
+|1000000|  9836.356201171875 ms|
+|10000000|  149811.64013671875 ms|
