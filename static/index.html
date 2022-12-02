@@ -1,29 +1,23 @@
 <html>
 
 <head>
+  <script src="wasm_exec.js"></script>
   <script>
     const go = new Go();
     let mod, inst;
 
-    WebAssembly.instantiateStreaming(fetch("project_name_generator.wasm"), go.importObject).then(
+    WebAssembly.instantiateStreaming(fetch("app.wasm"), go.importObject).then(
       (result) => {
-        mod = result.module;
-        inst = result.instance;
-        go.run(inst);
+        go.run(result.instance);
+        generate();
       }
     );
-
-    function generateProjectName() {
-      return go.externval(inst.exports.GenerateProjectName()).toString();
-    }
   </script>
-
-
 </head>
 
 <body>
   <h1>Project Name Generator</h1>
-  <button onclick="alert(generateProjectName())">Generate project name</button>
+  <button onclick="alert(generate())">Generate project name</button>
 </body>
 
 </html>

@@ -1,8 +1,11 @@
+//go:build js && wasm
+
 package main
 
 import (
 	"fmt"
 	"math/rand"
+	"syscall/js"
 )
 
 var (
@@ -36,6 +39,14 @@ func GenerateProjectName() string {
 	return fmt.Sprintf("%s %s", adjectives[rand.Intn(len(adjectives))], nouns[rand.Intn(len(nouns))])
 }
 
+func gernerateFunction(this js.Value, p []js.Value) interface{} {
+	return js.ValueOf(GenerateProjectName())
+}
+
 func main() {
-	fmt.Println(GenerateProjectName())
+	c := make(chan struct{}, 0)
+	//fmt.Println(GenerateProjectName())
+	println("Hello, WebAssembly!")
+	js.Global().Set("generate", js.FuncOf(gernerateFunction))
+	<-c
 }
