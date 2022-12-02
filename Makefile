@@ -1,5 +1,5 @@
 all:
-	GOOS=js GOARCH=wasm go build -o static/projectname_generator.wasm -ldflags="-s -w" -tags=js -gcflags="-m" -trimpath app.go
+	GOOS=js GOARCH=wasm go build -o ./static/app.wasm -ldflags="-s -w" -tags=js -gcflags="-m" -trimpath app.go
 
 clean:
-	rm -f projectname_generator.wasm
+	rm -f ./static/app.wasm

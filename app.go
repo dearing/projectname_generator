@@ -1,44 +1,41 @@
-//go:build js && wasm
-
 package main
 
 import (
 	"fmt"
 	"math/rand"
-	"syscall/js"
-	"time"
 )
 
 var (
 	adjectives = []string{
-		"gigantic",
-		"funky",
-		"gleaming",
-		"magnificent",
+		"adorable",
+		"beautiful",
+		"clever",
+		"elegant",
+		"fierce",
+		"gorgeous",
 		"majestic",
+		"powerful",
+		"quirky",
+		"sparkling",
+		"witty",
 	}
-
 	nouns = []string{
-		"tiger",
-		"elephant",
-		"unicorn",
+		"bird",
+		"cat",
 		"dragon",
-		"pegasus",
+		"flower",
+		"fox",
+		"horse",
+		"unicorn",
+		"zebra",
 	}
 )
 
-func main() {
-	rand.Seed(time.Now().UnixNano())
-
-	c := make(chan struct{})
-	js.Global().Set("generateProjectName", js.FuncOf(generateProjectName))
-	<-c
+// GenerateProjectName generates a random project name.
+func GenerateProjectName() string {
+	return fmt.Sprintf("%s %s", adjectives[rand.Intn(len(adjectives))], nouns[rand.Intn(len(nouns))])
 }
 
-func generateProjectName(this js.Value, args []js.Value) interface{} {
-	adjective := adjectives[rand.Intn(len(adjectives))]
-	noun := nouns[rand.Intn(len(nouns))]
-	projectName := fmt.Sprintf("%s %s", adjective, noun)
-
-	return projectName
+func main() {
+	fmt.Println(GenerateProjectName())
 }

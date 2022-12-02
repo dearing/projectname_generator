@@ -2,24 +2,28 @@
 
 <head>
   <script>
-    var go = new Go();
+    const go = new Go();
+    let mod, inst;
 
-    WebAssembly.instantiateStreaming(fetch("project_name_generator.wasm"), go.importObject).then(function (result) {
-      go.run(result.instance);
-    });
+    WebAssembly.instantiateStreaming(fetch("project_name_generator.wasm"), go.importObject).then(
+      (result) => {
+        mod = result.module;
+        inst = result.instance;
+        go.run(inst);
+      }
+    );
 
     function generateProjectName() {
-      return go.exports.generateProjectName();
+      return go.externval(inst.exports.GenerateProjectName()).toString();
     }
   </script>
+
+
 </head>
 
 <body>
   <h1>Project Name Generator</h1>
-  <button onclick="document.getElementById('projectName').innerHTML = generateProjectName();">Generate Project
-    Name</button>
-  <p id="projectName"></p>
+  <button onclick="alert(generateProjectName())">Generate project name</button>
 </body>
 
 </html>
-``
